@@ -1,4 +1,5 @@
-Project Step 7 FINAL
+Diablo 3 Speedrunning
+
 Summary of Feedback:
 We received feedback about the lack of depth and detail in the outline of the project as well ass the specific entities and what they are and do.  We also received feedback about the interface, some leftover templating in the Data Manipulation Queries SQL file and updating and deleting on cascade for the Act_Runs table.  Finally, we received feedback on the ID sections in the tables and formatting clarifications for Act_Runs as well as more information on the home page.
 Actions based on feedback:
