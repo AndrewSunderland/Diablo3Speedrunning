@@ -1,0 +1,76 @@
+<div style="margin: auto; width: 50%; padding: 10px;">
+    <div class="card">
+        <div class="card-header">
+            Search {{removeLastChar tableType}}
+        </div>
+        <br>
+        <div>
+            <form id = 'search-form'>
+                <div class="form-group">
+                    <label for="class-name">Player name:</label>
+                    <input name ="player" type="text" class="form-control" id="search-text">
+                </div>
+                <div class="form-group">
+                    <label for="class-name">Act:</label>
+                    <input name ="act" type="text" class="form-control" id="search-text">
+                </div>
+                <div class="form-group">
+                    <label for="class-name">Time (Format := 'HH:MM:SS'):</label>
+                    <input name ="time" type="text" class="form-control" id="search-text">
+                </div>
+                <div class="form-group">
+                    <label for="class-name">Class:</label>
+                    <input name ="class" type="text" class="form-control" id="search-text">
+                </div>
+                <div class="form-group">
+                    <label for="class-name">Platform:</label>
+                    <input name ="platform" type="text" class="form-control" id="search-text">
+                </div>
+                <div class="form-group">
+                    <label for="class-name">Date:</label>
+                    <input name ="date" type="date" class="form-control" id="search-text">
+                </div>
+                <input type="button" value="Search" onClick="window.location.href = getNewLocation('search-form')" class="btn btn-primary">
+            </form>
+        </div>
+        <br>
+    </div>
+    <br>
+    <a href="/add/{{tableToPath tableType}}" class="btn btn-primary">Add</a>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            {{tableType}}
+        </div>
+        <div>
+<!--            Don't show act_run id-->
+            <table class="table">
+                <thead class="thead-dark">
+                <th>Player</th>
+                <th>Act</th>
+                <th>Time</th>
+                <th>Class</th>
+                <th>Platform</th>
+                <th>Date</th>
+                </thead>
+                <tbody id="table-body">
+                {{#each rows}}
+                    <tr id="{{../tableType}}-{{this.id}}">
+                        <td>{{this.player}}</td>
+                        <td>{{this.act}}</td>
+                        <td>{{this.time}}</td>
+                        <td>{{this.class}}</td>
+                        <td>{{this.platform}}</td>
+                        <td>{{removeTime this.date}}</td>
+                        <td><button onClick="if (confirm('Are you sure you want to delete?')) {
+                                deleteRecord('{{tableToPath ../tableType}}', {{this.id}}).
+                                then(resp => window.location.reload())} else { window.location.reload(); };"
+                                    class="btn btn-primary">Delete</button></td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

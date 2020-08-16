@@ -1,0 +1,30 @@
+<div style="margin: auto; width: 50%; padding: 10px;">
+    <div class="card">
+        <div class="card-header">
+            Add {{removeLastChar tableType}}
+        </div>
+        <br>
+        <div>
+            <form id="{{tableType}}-form">
+                {{#each record}}
+                    <div class="form-group" >
+                        <label for="{{../tableType}}-{{stripIdSuffex @key}}">{{formatKey @key}}:</label>
+                        <input type="{{setType @key}}" name="{{ stripIdSuffex @key}}" value="{{this}}"
+                               class="form-control" id="{{../tableType}}-{{stripIdSuffex @key}}">
+                    </div>
+                {{/each}}
+                <input type="button" class="btn btn-primary" value="Add"
+                       onClick="  if (confirm('Are you sure you want to make this Update?')) {
+                                       validateForm('{{tableType}}-form')
+                                       .then(res => createRecord('{{tableToPath tableType}}', '{{tableType}}-form')
+                                       .then(res => {
+                                            window.location.replace('/{{tableToPath tableType}}');
+                                        }))
+                                        .catch(err => alert(err));
+                                    }"
+                       class="btn btn-primary"/>
+            </form>
+        </div>
+        <br>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div style="margin: auto; width: 50%; padding: 10px;">
+    <div class="card">
+        <div class="card-header">
+            Edit {{removeLastChar tableType}}
+        </div>
+        <br>
+        <div>
+            <form id="{{tableType}}-form">
+                {{#each record}}
+                    <div class="form-group">
+                        <label for="{{../tableType}}-{{@key}}"></label>
+                        <input type = "{{hiddenifId @key}}" name="{{@key}}" value="{{this}}"
+                                                     class="form-control" id="{{../tableType}}-{{@key}}">
+                    </div>
+                {{/each}}
+                <input type="button" class="btn btn-primary" value="Update"
+                       onClick="if (confirm('Are you sure you want to make this Update?')) {
+                               updateRecord('{{tableToPath tableType}}', '{{tableType}}-form')
+                               .then(resp => {
+                                   window.location.replace('/{{tableToPath tableType}}');
+                               })} else {
+                                   window.location.replace('/{{tableToPath tableType}}');
+                               } "
+                       class="btn btn-primary"/>
+            </form>
+        </div>
+        <br>
+    </div>
+</div>

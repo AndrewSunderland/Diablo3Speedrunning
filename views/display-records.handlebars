@@ -1,0 +1,49 @@
+<div style="margin: auto; width: 50%; padding: 10px;">
+    <div class="card">
+        <div class="card-header">
+            Search {{removeLastChar tableType}}
+        </div>
+        <br>
+        <div>
+            <form id = 'search-form'>
+                <div class="form-group">
+                    <label for="class-name">{{removeLastChar tableType}}'s name:</label>
+                    <input name ="name" type="text" class="form-control" id="search-text">
+                </div>
+                <input type="button" value="Search" onClick="window.location.href = getNewLocation('search-form')" class="btn btn-primary">
+            </form>
+        </div>
+        <br>
+    </div>
+    <br>
+    <a href="/add/{{tableToPath tableType}}" class="btn btn-primary">Add</a>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            {{tableType}}
+        </div>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                <th>name</th>
+                <th>#</th>
+                <th>#</th>
+                </thead>
+                <tbody id="table-body">
+                    {{#each rows}}
+                    <tr id="{{../tableType}}-{{this.id}}">
+
+                        <td>{{this.name}}</td>
+                        <td><a href="/edit/{{tableToPath ../tableType}}/{{this.id}}"class="btn btn-primary">Edit</a></td>
+                        <td><button onClick="if (confirm('Are you sure you want to delete?')) {
+                            deleteRecord('{{tableToPath ../tableType}}', {{this.id}}).
+                                then(resp => window.location.reload())} else { window.location.reload(); };"
+                                    class="btn btn-primary">Delete</button></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
